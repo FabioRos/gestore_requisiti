@@ -15,9 +15,14 @@ class DWMenuPages {
         //Aggiungo la favicon al back-end
         add_action('admin_head', array(&$this, 'my_favicon'));
         $this->includes();
+        $controller=new DB_controller();
+        $controller->setup_db();
+        
+        
     }
 
     public function includes() {
+        require_once 'DB_controller.php';
         //require ( plugins_url() .  'class/SLSBlogRolesClass.php');
         //require_once plugin_dir_path(__FILE__) . 'SLSBlogRolesClass.php';
         //require_once plugin_dir_path(__FILE__) . 'SLSRolesTableClass.php';
