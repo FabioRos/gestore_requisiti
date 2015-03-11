@@ -3,11 +3,6 @@
 $plugin_url = plugin_dir_url(__DIR__);
 define('PLUGIN_BASE_URL', $plugin_url);
 
-define('T_REQUISITO','Requisito');
-define('T_IMG_USE_CASE','ImmagineUC');
-define('T_IMG_REQUISITO','ReqImg');
-define('T_DIPENDENZE','Dipendenze');
-
 
 
 
