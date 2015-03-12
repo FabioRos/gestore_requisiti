@@ -15,7 +15,17 @@ class DB_controller {
     
     public function __construct() {
         $this->definisci();
+        $this->includes();
+        $cntrl = new controller_requisito();
+        
     }
+    
+    public function  includes() {
+        require_once 'controller_requisito.php';
+        require_once 'controller_req_img.php';
+    }
+    
+    
     
     public function definisci() {
         define('T_REQUISITO','Requisito');
@@ -60,3 +70,4 @@ class DB_controller {
     
     //put your code here
 }
+
