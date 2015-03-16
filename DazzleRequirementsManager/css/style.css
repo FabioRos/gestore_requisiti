@@ -1,0 +1,49 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12-mar-2015, 12.40.30
+    Author     : Fabio
+*/
+
+.form_item_DW{
+    display: block;
+}
+
+table.DW_requirements_render {
+    border-collapse: collapse;
+    border: 1px solid #666;   
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+th.DW_requirements_render {
+    border: 1px solid #ddd; 
+    background: #333; 
+    color:#fff;
+    font-weight: bold;    
+    padding: 2px;
+}
+
+
+table.DW_requirements_render tr:nth-child(odd){
+    background: #99ccff;
+}
+
+table.DW_requirements_render tr:nth-child(even){
+    background: #ddd;
+}
+
+
+table.DW_requirements_render td{
+    border: 1px solid #333; 
+}
+
+th#th_Modifica{
+    width:100px;
+}
+td#btn_modifica{
+    text-align: center;
+}

@@ -12,9 +12,18 @@ class controller_requisito {
         //$this->rimuovi("id");
     }
 
+    public function get_all() {
+        global $wpdb;
+        $sql = ("SELECT * FROM " . T_REQUISITO . ";");
+        //echo $sql;
+        return $wpdb->get_results($sql);
+    }
+    
+    
     public function inserisci($idReq, $tipo, $importanza, $descrizione) {
         global $wpdb;
         $sql = $wpdb->prepare("INSERT INTO " . T_REQUISITO . " VALUES(%s,%s,%d,%s,FALSE);", $idReq, $tipo, $importanza, $descrizione);
+       echo "<br />".$sql;
         $wpdb->query($sql);
     }
     public function rimuovi($idReq) {
