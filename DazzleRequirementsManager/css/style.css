@@ -21,6 +21,7 @@ table.DW_requirements_render {
 }
 th.DW_requirements_render {
     border: 1px solid #ddd; 
+    border-top: 1px solid #333;
     background: #333; 
     color:#fff;
     font-weight: bold;    
@@ -43,7 +44,38 @@ table.DW_requirements_render td{
 
 th#th_Modifica{
     width:100px;
+    border-right: 1px solid #333; 
+}
+
+th#th_IdReq{
+    border-left: 1px solid #333; 
+    
 }
 td#btn_modifica{
     text-align: center;
+}
+
+input.img_path{
+    min-width:350px !important;
+    float:left;
+    clear:right;
+}
+
+input.img_title{
+    min-width:350px !important;
+    float:left;
+    clear: left;
+}
+
+input#btn_aggiungi_requisito{
+    float: left;
+    clear: both;
+    margin-left: 30%;
+    min-width: 150px;
+}
+
+
+textArea.form_item_DW{
+    min-width: 60%; 
+    min-height: 250px;
 }

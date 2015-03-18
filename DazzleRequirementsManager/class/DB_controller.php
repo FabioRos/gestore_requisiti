@@ -23,6 +23,8 @@ class DB_controller {
     public function  includes() {
         require_once 'controller_requisito.php';
         require_once 'controller_req_img.php';
+        require_once 'controller_dipendenze.php';
+        require_once 'controller_immagineuc.php';
     }
     
     

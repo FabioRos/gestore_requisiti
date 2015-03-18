@@ -7,8 +7,8 @@ class controller_requisito {
 
     public function __construct() {
         //$this->inserisci("id", "tipo", 'a', "descrizione");
-        $this->modifica_descrizione("id", "mario");
-        $this->soddisfatto("id", FALSE);
+       // $this->modifica_descrizione("id", "mario");
+        //$this->soddisfatto("id", FALSE);
         //$this->rimuovi("id");
     }
 

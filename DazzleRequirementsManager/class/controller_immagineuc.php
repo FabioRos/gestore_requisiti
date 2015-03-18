@@ -8,6 +8,10 @@ class controller_immagineuc {
 	public function __construct() {
 	}
 	
+        public function get_id($percorso) {
+            //...
+        }
+        
 	public function insert($idImg,$titolo,$percorso) {
 		global $wpdb;
 		

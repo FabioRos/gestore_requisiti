@@ -1,8 +1,10 @@
 <?php
 
 $plugin_url = plugin_dir_url(__DIR__);
-define('PLUGIN_BASE_URL', $plugin_url);
+define('PLUGIN_BASE_URL', $plugin_url); 
 
+
+//testato::  http://***/wp-content/plugins/DazzleRequirementsManager/
 
 
 
