@@ -17,9 +17,16 @@ class controller_dipendenze {
 	
 	public function delete($idReq,$idDip) {
 		global $wpdb;
-		$sql = $wpdb->prepare("DELETE FROM " . T_DIPENDENZE . " WHERE idReq=$idReq AND idDip=$idDip;",$idReq,$idDip);
+		$sql = $wpdb->prepare("DELETE FROM " . T_DIPENDENZE . " WHERE IdReq=%s AND IdDip=%s;",$idReq,$idDip);
 		$wpdb->query($sql);
 	}	
+        
+        public function conta_figli($idRequisitoPadre) {
+            global $wpdb;
+            $sql = $wpdb->prepare("SELECT COUNT(*) FROM " . T_DIPENDENZE . " WHERE IdDip=%s;",$idRequisitoPadre);
+            echo $sql;
+            return $wpdb->get_var($sql);
+        }
 }
 
 ?> 

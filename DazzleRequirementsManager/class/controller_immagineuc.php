@@ -8,8 +8,11 @@ class controller_immagineuc {
 	public function __construct() {
 	}
 	
-        public function get_id($percorso) {
-            //...
+        public function get_id($percorso) { 
+            global $wpdb;
+            $sql = $wpdb->prepare("SELECT IdImg FROM " . T_IMG_USE_CASE . " WHERE percorso=%s;",$percorso);
+            echo $sql;
+            return $wpdb->get_var($sql);
         }
         
 	public function insert($idImg,$titolo,$percorso) {

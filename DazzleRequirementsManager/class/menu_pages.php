@@ -94,6 +94,10 @@ class DWMenuPages {
         <label for="parent" class="form_item_DW">Padre:</label>
         <?php
         $controller = new controller_requisito ();
+       
+        
+        
+        
         $json_data=json_encode($controller->get_all());
        // var_dump($elenco_requisiti);
        //  for($i=1;$i<6;$i++){?>
@@ -108,11 +112,92 @@ class DWMenuPages {
           -->     
         <?php
         //}
-            echo "<select class=\"form_item_DW\" id='select_parent' name=\"parent\" id=\"importanza\"> </select>";
+            echo "<select class=\"form_item_DW\" id='select_parent' name=\"parent\" id=\"importanza\"> "
+                 . " <option value=\"NULL\">nessuno</option>"
+                 . "</select>";
           ?>
         
          
-        <script type='text/javascript'>
+       
+        <?php
+        include PLUGIN_BASE_URL . '/pages/page_insert.php';
+        
+
+        //BUSINESS LOGIC
+        
+        if (isset($_POST['descrizione']) && $_POST['descrizione'] != "" &&
+                isset($_POST['tipo']) && $_POST['tipo'] != "" &&
+                isset($_POST['importanza']) && $_POST['importanza'] != "") {
+            $d = $_POST['descrizione'];
+            $t = $_POST['tipo'];
+            $i = $_POST['importanza'];
+
+            $idReq='';
+               //Dipendenze
+            $parent_=$_POST["parent"];
+            echo "PRINT ".$parent_."<br />";
+            if (isset($parent_)&& $parent_!="NULL"){
+                $controller_dipendenze=new controller_dipendenze();
+                //genero IdReq
+                $figli=$controller_dipendenze->conta_figli($parent_);
+                echo "PRINT".$figli."<br />";
+                $idReq="".$parent_.".".(($figli)+1);//aumentare di numero
+                echo "PRINT".$figli."<br >";
+                //unset($_POST["parent"]);
+                }else{
+               $idReq = $controller->get_max_top_level_number()+1;
+            }
+            
+            //$controller_dip= new controller_dipendenze();
+        
+            
+           // $idReq=$controller_dip->conta_figli("fydfxxx");
+            
+            
+            /* per il calcolo dell'IdReq:
+             * 
+             * 1.prendo l'id del padre nel formato 1.2.....
+             * 2.conto quanti figli ha nella tabella delle dipendenze
+             * 3.l' IdReq sarà: <IdPadre>.<numero figli correnti+1>
+             * 
+             */
+            
+            
+            $controller = new controller_requisito ();
+            $controller->inserisci($idReq, $t, $i, $d);
+            $controller_img=new controller_immagineuc();
+            
+            
+           $controller_dipendenze->insert($idReq, $parent_);
+            
+            $controller_req_img=new controller_req_img();
+            
+            $base_path = $_POST["base_path_img"];
+            for($i=1;$i<=5;$i++){
+                
+                $percorso = trim($base_path.$_POST["img$i"]);
+                if (isset($_POST["img$i"]) && $_POST["img$i"]!=''){
+                    $controller_img->insert('',$_POST["titolo_img$i"], $percorso);
+                    $controller_req_img->insert($idReq, $controller_img->get_id($percorso));
+                }
+            }
+                
+            
+            
+         
+            
+            
+            
+            
+            unset($_POST['descrizione']);
+            unset($_POST['tipo']);
+            unset($_POST['importanza']);
+            
+        }
+         $json_data=json_encode($controller->get_all());
+        ?>
+          
+           <script type='text/javascript'>
         
        // $("#select_parent").append(new Option(""+option text+"", ""+value+""));
         
@@ -135,46 +220,8 @@ class DWMenuPages {
         });  
 
         </script>
+            
         <?php
-        include PLUGIN_BASE_URL . '/pages/page_insert.php';
-        
-
-        //BUSINESS LOGIC
-        
-        if (isset($_POST['descrizione']) && $_POST['descrizione'] != "" &&
-                isset($_POST['tipo']) && $_POST['tipo'] != "" &&
-                isset($_POST['importanza']) && $_POST['importanza'] != "") {
-            $d = $_POST['descrizione'];
-            $t = $_POST['tipo'];
-            $i = $_POST['importanza'];
-
-            $idReq="abcdfeg";
-            $idImg="6";
-            $controller = new controller_requisito ();
-            $controller->inserisci($idReq, $t, $i, $d);
-            $controller_img=new controller_immagineuc();
-            
-            
-            
-            $controller_req_img=new controller_req_img();
-            
-            $base_path = $_POST["base_path_img"];
-            for($i=1;$i<=5;$i++){
-                $percorso = trim($base_path.$_POST["img$i"]);
-                if (isset($_POST["img$i"]) && $percorso!=''){
-                    $controller_img->insert($idImg,$_POST["titolo_img$i"], $percorso);
-                    $controller_req_img->insert($idReq, $idImg);
-                }
-            }
-                    
-            
-            
-            
-            
-            unset($_POST['descrizione']);
-            unset($_POST['tipo']);
-            unset($_POST['importanza']);
-        }
     }
     public function modifica_requisiti_handler() {
         echo "<h1>MODIFICA REQUISITI</h1>";
@@ -219,12 +266,65 @@ class DWMenuPages {
         echo "<h1>VERIFICA REQUISITI</h1>";
     }
     
-       public function img_requisiti_handler() {
+   public function img_requisiti_handler() {
         echo "<h1>ASSOCIAZIONI IMMAGINI REQUISITI</h1>";
         $url  = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
         $url .= $_SERVER['SERVER_NAME'];
         $url .= $_SERVER['REQUEST_URI'];
 
+        $controller_requisiti = new controller_requisito ();
+        $json_data=json_encode($controller_requisiti->get_all());
+        
+          echo "<select class=\"form_item_DW\" id='select_requisiti' name=\"parent\" id=\"importanza\"> "
+                 . " <option value=\"NULL\">nessuno</option>"
+                 . "</select>";
+         
+          for($i=1;$i<=5;$i++){
+              echo "<img id='img_$i'class='DW_images'>";
+              
+          }
+          
+          ?>
+        
+         
+        <script type='text/javascript'>
+        
+       // $("#select_parent").append(new Option(""+option text+"", ""+value+""));
+        
+        
+        
+        
+        function popola_select(data) {
+            for (var i = 0; i < data.length; i++) {
+                aggiungi_opzione(data[i]);
+            }
+        }
+
+        function aggiungi_opzione(rowData) {
+            jQuery("#select_requisiti").append(new Option(""+rowData.IdReq+"", ""+rowData.IdReq+""));
+        }
+        
+        jQuery("#select_requisiti").change(function(){
+                 var img = new Image();
+                 img.src=<?php echo $_POST["base_path_img"]; ?>+jQuery("#select_requisiti option:selected").value;
+                 if(img.height != 0)
+                     alert('vuoto');
+                     
+             });
+
+        jQuery(document).ready(function() {
+            var lista_requisiti_json = <?php echo $json_data; ?>;
+            popola_select(lista_requisiti_json);
+            
+//             
+            
+            
+        });  
+
+        </script>
+        <?php
+        
+        
 //echo(dirname(dirname($url))).'/wp-content/plugins/DazzleRequirementsManager/images/Requisiti/*.*';
 
 //get all image files with a .jpg extension.
@@ -236,7 +336,7 @@ class DWMenuPages {
 //}
         
 
-        $uploads = dirname(dirname($url)).'/wp-content/plugins/DazzleRequirementsManager/images/Requisiti';
+       /* $uploads = dirname(dirname($url)).'/wp-content/plugins/DazzleRequirementsManager/images/Requisiti';
         echo $uploads;
         $dir = opendir($uploads);
         if ($dir) {
@@ -256,7 +356,7 @@ class DWMenuPages {
                 echo '" alt="" /></li>';
         }
         echo '</ul>';
-
+*/
         
         /*
          Per il momento le immagini si devono caricare dal frontend con una pagina apposita, serve il plugin Wordpress File Upload

@@ -7,6 +7,7 @@ class controller_req_img {
     public function insert($idReq,$idImg) {
         global $wpdb;
         $sql=$wpdb->prepare("INSERT INTO ". T_IMG_REQUISITO." VALUES(%s,%d);",$idReq,$idImg);
+        echo $sql;
         $wpdb->query($sql);
     }
     public function delete($idReq,$idImg) {

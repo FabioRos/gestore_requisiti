@@ -1,0 +1,556 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Wordpress File Upload\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-22 22:06+0200\n"
+"PO-Revision-Date: 2014-02-22 22:07+0200\n"
+"Last-Translator: nickboss <nickboss@iptanus.com>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;gettext;gettext_noop\n"
+"X-Poedit-Basepath: ../\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/wfu_constants.php:7
+msgid "Upload files"
+msgstr "Envoyer des fichiers"
+
+#: lib/wfu_constants.php:8
+msgid "Select File"
+msgstr "Sélectionner un fichier"
+
+#: lib/wfu_constants.php:9
+msgid "Upload File"
+msgstr "Envoyer de fichier"
+
+#: lib/wfu_constants.php:24
+msgid "File Upload Notification"
+msgstr "Notification d'envoi de fichier"
+
+#: lib/wfu_constants.php:25
+msgid ""
+"Dear Recipient,%n%%n%   This is an automatic delivery message to notify you "
+"that a new file has been uploaded.%n%%n%Best Regards"
+msgstr ""
+"Cher Destinataire,%n%%n%   Ceci est un message envoyé automatiquement pour "
+"vous prevenir qu'un nouveau fichier a été uploadé. %n%%n%Cordialement"
+
+#: lib/wfu_constants.php:31
+#, fuzzy, php-format
+msgid "File %filename% uploaded successfully"
+msgstr "Le fichier %filename% a été correctement envoyé"
+
+#: lib/wfu_constants.php:32
+#, fuzzy, php-format
+msgid "File %filename% uploaded successfully but with warnings"
+msgstr ""
+"Le fichier %filename% a été envoyé avec succès mais avec des avertissements"
+
+#: lib/wfu_constants.php:33
+msgid "File %filename% not uploaded"
+msgstr "Le fichier %filename% n'a pas été envoyé"
+
+#: lib/wfu_constants.php:34
+msgid "File %filename% is being uploaded"
+msgstr "Le fichier %filename% est en cours d'envoi"
+
+#: lib/wfu_constants.php:51
+msgid "Your message"
+msgstr "Votre message"
+
+#: lib/wfu_constants.php:55
+msgid ""
+"Error. Could not resolve ftp target filedir. Check the domain in 'ftpinfo' "
+"attribute."
+msgstr ""
+"Erreur. Impossible d'atteindre le repertoire ftp de destination. Vérifier le "
+"domaine dans l'attribut 'ftpinfo'."
+
+#: lib/wfu_constants.php:56
+msgid "Error. Invalid ftp information. Check 'ftpinfo' attribute."
+msgstr ""
+"Erreur. Les informations de ftp sont invalides. Vérifier le domaine dans "
+"l'attribut 'ftpinfo'."
+
+#: lib/wfu_constants.php:57
+msgid ""
+"Error. Could not extract ftp information from 'ftpinfo' attribute. Check its "
+"syntax."
+msgstr ""
+"Erreur. Impossible d'obtenir les informations dans l'attribut 'ftpinfo'. "
+"Vérifez sa syntax."
+
+#: lib/wfu_constants.php:58
+msgid ""
+"Error. Could not resolve ftp target filename. Check the domain in 'ftpinfo' "
+"attribute."
+msgstr ""
+"Erreur. Impossible de résoudre le nom de fichier de destination ftp. "
+"Vérifiez le domaine dans l'attribut 'ftpinfo'."
+
+#: lib/wfu_constants.php:59
+msgid ""
+"Error. The upload size limit of PHP directive upload_max_filesize is "
+"preventing the upload of big files.\n"
+"PHP directive upload_max_filesize limit is: "
+msgstr ""
+"Erreur. La directive PHP de taille limite d'envoi de fichier "
+"upload_max_filesize, empêche l'envoi de gros fichier.\n"
+"La limite de la directive PHP upload_max_filesize est de :"
+
+#: lib/wfu_constants.php:60
+msgid ""
+"The upload time limit of PHP directive max_input_time is preventing the "
+"upload of big files.\n"
+"PHP directive max_input_time limit is: "
+msgstr ""
+"La limite de temps d'envoi de la directive PHP max_input_time, empêche "
+"l'envoi de gros fichier.\n"
+"La limite de la directive PHP max_input_time est de :"
+
+#: lib/wfu_constants.php:61
+msgid ""
+"Error. Permission denied to write to target folder.\n"
+"Check and correct read/write permissions of target folder."
+msgstr ""
+"Erreur. La premission d'écrire dans le repertoire de destination.\n"
+"Vérifiez et corrigez les permission en lecture/ecriture du repertoire de "
+"destination."
+
+#: lib/wfu_constants.php:62
+msgid "Targer folder doesn't exist."
+msgstr "Le répertoire de destination n'existe pas."
+
+#: lib/wfu_constants.php:63
+msgid "Upload failed! Missing a temporary folder."
+msgstr "Envoi impossible! Il manque un répertoire temporaire."
+
+#: lib/wfu_constants.php:64
+msgid "Upload failed! Permission denied to write to target folder."
+msgstr ""
+"Envoi impossible! Permission refusée dans le répertoire de destination."
+
+#: lib/wfu_constants.php:65
+msgid "File not allowed."
+msgstr "Type de fichier non autorisé."
+
+#: lib/wfu_constants.php:66
+msgid "The uploaded file exceeds the file size limit."
+msgstr "La taille du fichier est supérieure à la taille limite."
+
+#: lib/wfu_constants.php:67
+msgid ""
+"Upload failed! The uploaded file exceeds the file size limit of the server. "
+"Please contact the administrator."
+msgstr ""
+"Envoi impossible! La taille du fichier excède la taille limite du serveur. "
+"Merci de contacter l'administrateur."
+
+#: lib/wfu_constants.php:68
+msgid ""
+"Upload failed! The duration of the upload exceeded the time limit of the "
+"server. Please contact the administrator."
+msgstr ""
+"Envoi impossible! La durée maximum d'envoi sur le serveur excède la durée "
+"limite du serveur. Merci de contacter l'administrateur."
+
+#: lib/wfu_constants.php:69
+msgid ""
+"Upload failed! The uploaded file exceeds the MAX_FILE_SIZE directive that "
+"was specified in the HTML form."
+msgstr ""
+"Envoi impossible! La taille du fichier excède la directive MAX_FILE_SIZE "
+"spécifiée dans le formulaire HTML."
+
+#: lib/wfu_constants.php:70
+msgid "Upload failed! The uploaded file was only partially uploaded."
+msgstr "Envoi impossible! Le fichier à été partiellement envoyé."
+
+#: lib/wfu_constants.php:71
+msgid "Upload failed! No file was uploaded."
+msgstr "Envoi impossible! Le fichier n'a pas été envoyé."
+
+#: lib/wfu_constants.php:72
+msgid "Upload failed! Failed to write file to disk."
+msgstr "Envoi impossible! Impossible d'écrire sur le fichier sur le disque."
+
+#: lib/wfu_constants.php:73
+msgid ""
+"Upload failed! Error occured while moving temporary file. Please contact "
+"administrator."
+msgstr ""
+"Envoi impossible! Une erreur est survenue lors du déplacement du fichier "
+"temporaire. merci de contacter l'administrateur."
+
+#: lib/wfu_constants.php:74
+msgid ""
+"Upload failed! A PHP extension stopped the file upload. PHP does not provide "
+"a way to ascertain which extension caused the file upload to stop; examining "
+"the list of loaded extensions with phpinfo() may help."
+msgstr ""
+"Envoi impossible! Une extension PHP a arrété l'envoi du fichier. PHP ne peut "
+"pas fournir avec certitude quelle extension est en cause; examiner la liste "
+"des extensions chargées avec phpinfo() peut être nécessaire."
+
+#: lib/wfu_constants.php:75
+msgid "Upload failed! Error occured while attemting to upload the file."
+msgstr ""
+"Envoi impossible! Une erreur est survenue pendant la tentative d'envoi du "
+"fichier."
+
+#: lib/wfu_constants.php:76
+msgid "Upload failed!"
+msgstr "Envoi impossible!"
+
+#: lib/wfu_constants.php:77
+msgid "No file!"
+msgstr "Pas de fichier!"
+
+#: lib/wfu_constants.php:78
+msgid ""
+"Upload failed! The upload has been canceled by the user or the browser "
+"dropped the connection."
+msgstr ""
+"Envoi impossible! L'envoi a été annulé par l'utilisateur ou le navigateur à "
+"cassé la connexion."
+
+#: lib/wfu_constants.php:79
+msgid "Upload failed! Unknown error."
+msgstr "Envoi impossible! Erreur inconnue."
+
+#: lib/wfu_constants.php:80
+msgid "Please contact the administrator."
+msgstr "Merci de contacter l'administrateur."
+
+#: lib/wfu_constants.php:81
+msgid "No result from remote server!"
+msgstr "Pas de résultat du serveur distant!"
+
+#: lib/wfu_constants.php:82
+msgid " but with warnings"
+msgstr "mais avec des avertissements"
+
+#: lib/wfu_constants.php:83 lib/wfu_constants.php:85
+msgid "Warning: JSON parse error."
+msgstr "Attention: Erreur d'analyse JSON"
+
+#: lib/wfu_constants.php:84
+msgid ""
+"Upload parameters of this file, passed as JSON string to the handler, could "
+"not be parsed."
+msgstr ""
+"Les paramètres d'envoi de ce fichier, passés en tant que chaine JSON, ne "
+"peuvent pas être analysés."
+
+#: lib/wfu_constants.php:86
+msgid ""
+"UploadStates, passed as JSON string to the handler, could not be parsed."
+msgstr "UploadStates, passé en tant que chaine JSON, ne peut pas être analysé."
+
+#: lib/wfu_constants.php:87
+msgid ""
+"Redirection to classic form functionality occurred due to unknown error."
+msgstr ""
+"La redirection vers la fonctionalité classique des formulaire s'est produit "
+"à cause d'une erreur inconue."
+
+#: lib/wfu_constants.php:88
+msgid ""
+"Redirection to classic form functionality occurred because AJAX is not "
+"supported."
+msgstr ""
+"La redirection vers la fonctionalité classique des formulaire s'est produit "
+"car AJAX n'est pas supporté."
+
+#: lib/wfu_constants.php:89
+msgid ""
+"Redirection to classic form functionality occurred because HTML5 is not "
+"supported."
+msgstr ""
+"La redirection vers la fonctionalité classique des formulaire s'est produit "
+"car HTML5 n'est pas supporté."
+
+#: lib/wfu_constants.php:90
+msgid ""
+"Redirection to classic form functionality occurred due to JSON parse error."
+msgstr ""
+"La redirection vers la fonctionalité classique des formulaire s'est produit "
+"à cause d'une erreur d'analyse JSON."
+
+#: lib/wfu_constants.php:91
+msgid "cannot be empty!"
+msgstr "ne peut pas être vide!"
+
+#: lib/wfu_constants.php:94
+msgid "Upload skipped! File already exists."
+msgstr "Envoi passé! Le fichier existe déjà."
+
+#: lib/wfu_constants.php:95
+msgid "No files have been selected!"
+msgstr "Aucun fichier n'a été envoyés!"
+
+#: lib/wfu_constants.php:96
+msgid "WPFilebase Plugin not updated because there were no files uploaded."
+msgstr ""
+"WPFilebase Plugin n'a pas été mis à jour car il n'y a pas de fichiers à "
+"envoyer."
+
+#: lib/wfu_constants.php:97
+msgid "Notification email was not sent because there were no files uploaded."
+msgstr ""
+"Le mail de notification n'a pas été envoyé car il n'y a pas de fichiers à "
+"envoyer."
+
+#: lib/wfu_constants.php:98
+msgid ""
+"Notification email was not sent because no recipients were defined. Please "
+"check notifyrecipients attribute in the shortcode."
+msgstr ""
+"Le mail de notification n'a pas été envoyé car il n'y a pas de destinataire. "
+"Merci de vérifier l'attribut notifyrecipients dans le shortcode."
+
+#: lib/wfu_constants.php:99
+msgid ""
+"Notification email was not sent due to an error. Please check "
+"notifyrecipients, notifysubject and notifymessage attributes for errors."
+msgstr ""
+"Le mail de notification n'a pas été envoyé car il n'y a une erreur. Merci de "
+"vérifier les attributs notifyrecipients, notifysubject et notifymessage."
+
+#: lib/wfu_constants.php:100
+msgid ""
+"Redirection not executed because redirection link is empty. Please check "
+"redirectlink attribute."
+msgstr ""
+"La redirection n'a pas été effectuée car le lien de redirection est vide. "
+"Merci de vérifier l'attribut redirectlink."
+
+#: lib/wfu_constants.php:101
+msgid ""
+"Redirection not executed because not all files were successfully uploaded."
+msgstr ""
+"La redirection n'est pas éxécuté car tous les fichiers n'ont pas été envoyés."
+
+#: lib/wfu_constants.php:104
+msgid "Test Mode"
+msgstr "Mode de test"
+
+#: lib/wfu_constants.php:105
+msgid "Upload path: %filepath%"
+msgstr "Chemin d'Upload : %filepath%"
+
+#: lib/wfu_constants.php:106
+msgid "Failed upload path: %filepath%"
+msgstr "Mauvais répertoir d'envoi: %filepath%"
+
+#: lib/wfu_constants.php:109
+msgid "This is a test message"
+msgstr "Ceci est un message de test"
+
+#: lib/wfu_constants.php:110
+msgid "This is a test administrator message"
+msgstr "Ceci est un message administrateur de test"
+
+#: lib/wfu_constants.php:111
+msgid "File testfile 1 under test"
+msgstr "File testfile 1 under test"
+
+#: lib/wfu_constants.php:112
+msgid "File testfile 1 message"
+msgstr "File testfile 1 message"
+
+#: lib/wfu_constants.php:113
+msgid "File testfile 1 administrator message"
+msgstr "Message administrateur File testfile"
+
+#: lib/wfu_constants.php:114
+msgid "File testfile 2 under test"
+msgstr "En test File testfile"
+
+#: lib/wfu_constants.php:115
+msgid "File testfile 2 message"
+msgstr "Message File testfile 2"
+
+#: lib/wfu_constants.php:116
+msgid "File testfile 2 administrator message"
+msgstr "Message administrateur File testfile 2"
+
+#: lib/wfu_constants.php:119
+msgid ""
+"Insert variable %username% inside text. It will be replaced by the username "
+"of the current user."
+msgstr ""
+"Insérez la variable %username% dans le texte. Il sera remplacé par le "
+"username de l'utilisateur courant."
+
+#: lib/wfu_constants.php:120
+msgid ""
+"Insert variable %useremail% inside text. It will be replaced by the email of "
+"the current user."
+msgstr ""
+"Insérez la variable %useremail% dans le texte. Il sera remplacé par l'email "
+"de l'utilisateur courant."
+
+#: lib/wfu_constants.php:121
+msgid ""
+"Insert variable %filename% inside text. It will be replaced by the filename "
+"of the uploaded file."
+msgstr ""
+"Insérez la variable %filename% dans le texte. Il sera remplacé par le nom du "
+"fichier à envoyer."
+
+#: lib/wfu_constants.php:122
+msgid ""
+"Insert variable %filepath% inside text. It will be replaced by the full "
+"filepath of the uploaded file."
+msgstr ""
+"Insérez la variable %filepath% dans le texte. Il sera remplacé par le chemin "
+"complet du fichier envoyé."
+
+#: lib/wfu_constants.php:123
+msgid ""
+"Insert variable %blogid% inside text. It will be replaced by the blog id of "
+"the website."
+msgstr ""
+"Insérez la variable %blogid% dans le texte. Il sera remplacé par l'id du "
+"blog du site web."
+
+#: lib/wfu_constants.php:124
+msgid ""
+"Insert variable %userdataXXX% inside text. Select the user field from the "
+"drop-down list. It will be replaced by the value that the user entered in "
+"this field."
+msgstr ""
+"Insérez la variable %userdataXXX% dans le texte. Sélectionnez le champ de "
+"l'utilisateur dans la liste déroulante. Il sera remplacé par la valeur que "
+"l'utilisateur aura entré dans ce champs."
+
+#: lib/wfu_constants.php:125
+msgid "Insert variable %n% inside text to denote a line change."
+msgstr ""
+"Insérez la variable %n% à l'intérieur du texte pour indiquer un changement "
+"de ligne."
+
+#: lib/wfu_constants.php:128
+msgid "Upload in progress"
+msgstr "Envoi en cours"
+
+#: lib/wfu_constants.php:129
+msgid "Upload in progress with warnings!"
+msgstr "Envoi en cours mais avec des avertissements!"
+
+#: lib/wfu_constants.php:130
+msgid "Upload in progress but some files already failed!"
+msgstr "Envoi en cours mais certains fichiers ont échoués!"
+
+#: lib/wfu_constants.php:131
+msgid "Upload in progress but no files uploaded so far!"
+msgstr "Envoi en cours mais aucun fichiers n'a été envoyé pour le moment!"
+
+#: lib/wfu_constants.php:132
+msgid "All files uploaded successfully"
+msgstr "Tous les fichiers ont été envoyés avec succès"
+
+#: lib/wfu_constants.php:133
+msgid "All files uploaded successfully but there are warnings!"
+msgstr ""
+"Tous les fichiers ont été envoyer avec succès mais avec des avertissements!"
+
+#: lib/wfu_constants.php:134
+msgid "File uploaded successfully but there are warnings!"
+msgstr "Fichiers envoyés avec succès mais certain avec un avertissement."
+
+#: lib/wfu_constants.php:135
+msgid "Some files failed to upload!"
+msgstr "Certains fichiers n'ont pas été envoyé"
+
+#: lib/wfu_constants.php:136
+msgid "All files failed to upload"
+msgstr "Impossible d'envoyer les fichiers"
+
+#: lib/wfu_constants.php:137
+msgid "File failed to upload"
+msgstr "Impossible d'envoyer le fichier"
+
+#: lib/wfu_constants.php:138
+msgid "There are no files to upload!"
+msgstr "Il n'y a pas de fichiers à envoyer"
+
+#: lib/wfu_constants.php:139
+msgid "Test upload message"
+msgstr "Message de test d'upload"
+
+#: lib/wfu_constants.php:140
+msgid "JSON parse warning!"
+msgstr "Avertisements d'analyse JSON."
+
+#: lib/wfu_constants.php:141
+msgid "please wait while redirecting..."
+msgstr "merci de patienter pendans la redirection..."
+
+#~ msgid "Upload File/Upload Files"
+#~ msgstr "Envoyer le fichier/Envoyer les fichiers"
+
+#~ msgid "Please fill in the above words: "
+#~ msgstr "Merci de remplir dans les mots ci-dessus:"
+
+#~ msgid "Bad captcha image!"
+#~ msgstr "Mauvaise image de captcha!"
+
+#~ msgid "No input!"
+#~ msgstr "Aucune entrée!"
+
+#~ msgid "Wrong captcha!"
+#~ msgstr "Mauvaise captcha!"
+
+#~ msgid "Error refreshing captcha!"
+#~ msgstr "Erreur rafraîchissant captcha!"
+
+#~ msgid "Unknown captcha error!"
+#~ msgstr "Captcha erreur inconnue!"
+
+#~ msgid "Captcha not supported by your browser!"
+#~ msgstr "Captcha n'a pas supporté par votre navigateur!"
+
+#~ msgid "Please do not use drag drop due to an internal problem."
+#~ msgstr "Ne pas utiliser un glisser-déposer à cause d'un problème interne."
+
+#~ msgid "Error during chunked upload. Unique ID empty in chunk %d"
+#~ msgstr ""
+#~ "Erreur pendant l'envoi de ficher en blocs. Unique ID vide en bloc %d"
+
+#~ msgid "Chunked upload is not allowed!"
+#~ msgstr "Envoi des fichers en blocs n'est pas autorisé!"
+
+#~ msgid "Chunked upload aborted due to error in previous chunk!"
+#~ msgstr ""
+#~ "Envoi de ficher en blocs interrompu suite à une erreur dans bloc "
+#~ "précédent!"
+
+#~ msgid "Could not write file chuck to destination on chunk %d"
+#~ msgstr "Impossible d'écrire le bloc de fichier a destination sur bloc %d"
+
+#~ msgid "Could not enlarge destination file on chunk %d"
+#~ msgstr "Impossible agrandir fichier de destination sur bloc %d"
+
+#~ msgid "Could not open file handles on chunk %d"
+#~ msgstr "Impossible d'ouvrir le fichier handles sur bloc %d"
+
+#~ msgid "checking captcha..."
+#~ msgstr "vérifier captcha..."
+
+#~ msgid "refreshing..."
+#~ msgstr "rafraîchissant..."
+
+#~ msgid "correct captcha"
+#~ msgstr "exact captcha"
+
+#~ msgid "Clear file list?"
+#~ msgstr "Effacer la liste des fichiers?"
+
+#~ msgid "DROP HERE"
+#~ msgstr "DEPOSER ICI"

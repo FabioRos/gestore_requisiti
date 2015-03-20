@@ -79,3 +79,8 @@ textArea.form_item_DW{
     min-width: 60%; 
     min-height: 250px;
 }
+
+#title_img_uc{
+    float:left;
+    clear: both;
+}

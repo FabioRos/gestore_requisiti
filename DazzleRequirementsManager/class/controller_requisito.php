@@ -17,6 +17,15 @@ class controller_requisito {
         $sql = ("SELECT * FROM " . T_REQUISITO . ";");
         //echo $sql;
         return $wpdb->get_results($sql);
+        
+    }
+    
+     public function get_all_Id() {
+        global $wpdb;
+        $sql = ("SELECT idReq FROM " . T_REQUISITO . ";");
+        //echo $sql;
+        return $wpdb->get_results($sql);
+        
     }
     
     
@@ -47,5 +56,18 @@ class controller_requisito {
         global $wpdb; 
         $sql = $wpdb->prepare("UPDATE " . T_REQUISITO . " SET Soddisfatto=%d WHERE idReq=%s;",$soddisfatto,$idReq);
         $wpdb->query($sql);
+    }
+    public function get_max_top_level_number() {
+        $array_id_req=$this->get_all_Id();
+        $max=0;
+        foreach ($array_id_req as $id_requisito) {
+            //esplosione e prendo il primo numero
+            $id_top_level=  explode('.', ''.$id_requisito->idReq);
+            $int_r = (int)$id_top_level[0];
+            if($int_r>$max){
+                $max=$int_r;
+            }
+        }
+        return $max;
     }
 }

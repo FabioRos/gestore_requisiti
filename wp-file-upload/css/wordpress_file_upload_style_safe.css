@@ -1,0 +1,229 @@
+/* File Textbox Styles */
+input.file_input_textbox
+{
+	position: relative;	
+	width: 150px;
+	height: 25px;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid;
+	border-color: #BBBBBB;
+	background-color: white;
+	color: black;
+}
+
+input.file_input_textbox:disabled
+{
+	position: relative;	
+	width: 150px;
+	height: 25px;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid;
+	border-color: #BBBBBB;
+	background-color: white;
+	color: silver;
+}
+
+input.file_input_textbox_nofile
+{
+	position: relative;	
+	width: 150px;
+	height: 25px;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid;
+	border-color: #BBBBBB;
+	background-color: red;
+	color: black;
+}
+
+/* Upload Form and Button Styles */
+input.file_input_button
+{
+	width: 100px; 
+	height: 27px;
+	position: absolute; 
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+	background-color: #EEEEEE;
+	color: #555555;
+/*	background-attachment: scroll; */
+	background-image: url("../images/white-grad-active.png");
+	background-position: left top;
+	background-repeat: repeat-x;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #BBBBBB;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	border-radius: 2px;
+}
+
+input.file_input_button_hover
+{
+	width: 100px; 
+	height: 27px;
+	position: absolute; 
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+	background-color: #EEEEEE;
+	color: #111111;
+/*	background-attachment: scroll; */
+	background-image: url("../images/white-grad-active.png");
+	background-position: left top;
+	background-repeat: repeat-x;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #333333;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	border-radius: 2px;
+}
+
+input.file_input_button:disabled, input.file_input_button_hover:disabled
+{
+	width: 100px; 
+	height: 27px;
+	position: absolute; 
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+	background-color: #EEEEEE;
+	color: silver;
+/*	background-attachment: scroll; */
+	background-image: url("../images/white-grad-active.png");
+	background-position: left top;
+	background-repeat: repeat-x;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #BBBBBB;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	border-radius: 2px;
+}
+
+input.file_input_submit
+{
+	width: 100px; 
+	height: 27px;
+	position: relative; 
+	margin: 0px;
+	padding: 0px;
+	background-color: #EEEEEE;
+	color: #555555;
+/*	background-attachment: scroll; */
+	background-image: url("../images/white-grad-active.png");
+	background-position: left top;
+	background-repeat: repeat-x;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #BBBBBB;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	border-radius: 2px;
+}
+
+input.file_input_submit:hover, input.file_input_submit:focus
+{
+	width: 100px; 
+	height: 27px;
+	position: relative; 
+	margin: 0px;
+	padding: 0px;
+	background-color: #EEEEEE;
+	color: #111111;
+/*	background-attachment: scroll; */
+	background-image: url("../images/white-grad-active.png");
+	background-position: left top;
+	background-repeat: repeat-x;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #333333;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	border-radius: 2px;
+}
+
+input.file_input_submit:disabled
+{
+	width: 100px; 
+	height: 27px;
+	position: relative; 
+	margin: 0px;
+	padding: 0px;
+	background-color: #EEEEEE;
+	color: silver;
+/*	background-attachment: scroll; */
+	background-image: url("../images/white-grad-active.png");
+	background-position: left top;
+	background-repeat: repeat-x;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #BBBBBB;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	border-radius: 2px;
+}
+
+input.file_input_hidden
+{
+	font-size: 45px; 
+	position: absolute;
+	right: 0px; 
+	top: 0px; 
+	margin: 0px;
+	padding: 0px;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	-moz-opacity: 0;
+	-khtml-opacity: 0;
+	opacity: 0;
+}
+
+/* Userdata styles */
+input.file_userdata_message, input.file_userdata_message_required
+{
+	width: 60%;
+	height: 25px;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid;
+	border-color: #BBBBBB;
+	background: none;
+	color: black;
+}
+
+input.file_userdata_message:disabled, input.file_userdata_message_required:disabled
+{
+	width: 60%;
+	height: 25px;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid;
+	border-color: #BBBBBB;
+	background: none;
+	color: silver;
+}
+
+input.file_userdata_message_required_empty
+{
+	width: 60%;
+	height: 25px;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid;
+	border-color: #BBBBBB;
+	background-color: red;
+	color: black;
+}
+
+
