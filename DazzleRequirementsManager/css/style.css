@@ -30,7 +30,7 @@ th.DW_requirements_render {
 
 
 table.DW_requirements_render tr:nth-child(odd){
-    background: #99ccff;
+    background: #aaccff;
 }
 
 table.DW_requirements_render tr:nth-child(even){
@@ -83,4 +83,12 @@ textArea.form_item_DW{
 #title_img_uc{
     float:left;
     clear: both;
+}
+
+.requisito_soddisfatto{
+    background-color: #33ff66;
+}
+
+.requisito_non_soddisfatto{
+    background-color: #ff3333;
 }

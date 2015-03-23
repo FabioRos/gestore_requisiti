@@ -264,6 +264,52 @@ class DWMenuPages {
     }
     public function verifica_requisiti_handler() {
         echo "<h1>VERIFICA REQUISITI</h1>";
+         include PLUGIN_BASE_URL . '/pages/page_verifica.php';
+        
+         
+        $controller = new controller_requisito ();
+        //$controller->set_soddisfatto("1", 1);
+        
+        
+        $json_data=json_encode($controller->get_all());
+        echo " <br />";//.$json_data;
+        
+        ?>
+        <script type='text/javascript'>
+        
+        function drawTable(data) {
+            for (var i = 0; i < data.length; i++) {
+                drawRow(data[i]);
+            }
+        }
+
+        function drawRow(rowData) {
+            var row = jQuery("<tr />")
+            jQuery("#requirements_render").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+            row.append(jQuery("<td id='idReq"+rowData.IdReq+"'>" + rowData.IdReq + "</td>"));
+            row.append(jQuery("<td id='Tipo"+rowData.IdReq+"'>" + rowData.Tipo + "</td>"));
+            row.append(jQuery("<td id='Importanza"+rowData.IdReq+"'>" + rowData.Imp + "</td>"));
+            row.append(jQuery("<td id='Descrizione"+rowData.IdReq+"'>" + rowData.Descr + "</td>"));
+             var s;
+            if(rowData.Soddisfatto=="1"){
+                s="requisito_soddisfatto";
+            }else  if(rowData.Soddisfatto=="0"){
+                s="requisito_non_soddisfatto";
+            }
+            row.append(jQuery("<td id='Soddisfatto"+rowData.IdReq+"' class='"+ s +"'>" + rowData.Soddisfatto + "</td>"));
+           
+        }
+        
+        
+        jQuery(document).ready(function() {
+            var lista_requisiti_json = <?php echo $json_data; ?>;
+            drawTable(lista_requisiti_json);
+        });  
+
+        </script>
+        
+        <?php
+        
     }
     
    public function img_requisiti_handler() {

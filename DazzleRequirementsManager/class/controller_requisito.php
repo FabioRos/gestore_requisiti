@@ -28,8 +28,15 @@ class controller_requisito {
         
     }
     
-    
-    public function inserisci($idReq, $tipo, $importanza, $descrizione) {
+    public function set_soddisfatto($idReq, $value){
+        global $wpdb;
+        $sql = $wpdb->prepare("UPDATE " . T_REQUISITO . " SET Soddisfatto=%d WHERE IdReq=%s;",$value,$idReq);
+        echo $sql;
+        $wpdb->query($sql);
+        //chiama funzione assestamento genitori
+    }
+
+        public function inserisci($idReq, $tipo, $importanza, $descrizione) {
         global $wpdb;
         $sql = $wpdb->prepare("INSERT INTO " . T_REQUISITO . " VALUES(%s,%s,%d,%s,FALSE);", $idReq, $tipo, $importanza, $descrizione);
        echo "<br />".$sql;
