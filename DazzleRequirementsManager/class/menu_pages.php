@@ -6,7 +6,6 @@
 /* * ******************************************************************************** */
 
 
-
 class DWMenuPages {
 
     public function __construct() {
@@ -139,16 +138,14 @@ class DWMenuPages {
             $idReq='';
                //Dipendenze
             $parent_=$_POST["parent"];
-            echo "PRINT ".$parent_."<br />";
+            $controller_dipendenze=new controller_dipendenze();
             if (isset($parent_)&& $parent_!="NULL"){
-                $controller_dipendenze=new controller_dipendenze();
                 //genero IdReq
                 $figli=$controller_dipendenze->conta_figli($parent_);
-                echo "PRINT".$figli."<br />";
                 $idReq="".$parent_.".".(($figli)+1);//aumentare di numero
-                echo "PRINT".$figli."<br >";
                 //unset($_POST["parent"]);
-                }else{
+            }
+			else{
                $idReq = $controller->get_max_top_level_number()+1;
             }
             
@@ -158,7 +155,7 @@ class DWMenuPages {
             $controller_img=new controller_immagineuc();
             
             
-           $controller_dipendenze->insert($idReq, $parent_);
+            $controller_dipendenze->insert($idReq, $parent_);
             
             $controller_req_img=new controller_req_img();
             

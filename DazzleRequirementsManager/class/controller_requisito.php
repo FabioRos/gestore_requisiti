@@ -23,7 +23,6 @@ class controller_requisito {
      public function get_all_Id() {
         global $wpdb;
         $sql = ("SELECT idReq FROM " . T_REQUISITO . ";");
-        //echo $sql;
         return $wpdb->get_results($sql);
         
     }
@@ -31,7 +30,6 @@ class controller_requisito {
     public function set_soddisfatto($idReq, $value){
         global $wpdb;
         $sql = $wpdb->prepare("UPDATE " . T_REQUISITO . " SET Soddisfatto=%d WHERE IdReq=%s;",$value,$idReq);
-        echo $sql;
         $wpdb->query($sql);
         //chiama funzione assestamento genitori
     }
@@ -39,7 +37,6 @@ class controller_requisito {
         public function inserisci($idReq, $tipo, $importanza, $descrizione) {
         global $wpdb;
         $sql = $wpdb->prepare("INSERT INTO " . T_REQUISITO . " VALUES(%s,%s,%d,%s,FALSE);", $idReq, $tipo, $importanza, $descrizione);
-       echo "<br />".$sql;
         $wpdb->query($sql);
     }
     public function rimuovi($idReq) {

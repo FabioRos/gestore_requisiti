@@ -10,8 +10,9 @@ class controller_dipendenze {
 	
 	public function insert($idReq,$idDip) {
 		global $wpdb;
+		if(isset($idDip) && $idDip!='')
+			$sql = $wpdb->prepare("INSERT INTO " . T_DIPENDENZE . " VALUES(%s,%s);",$idReq,$idDip);
 		
-		$sql = $wpdb->prepare("INSERT INTO " . T_DIPENDENZE . " VALUES(%s,%s);",$idReq,$idDip);
 		$wpdb->query($sql);
 	}
 	
@@ -24,7 +25,6 @@ class controller_dipendenze {
         public function conta_figli($idRequisitoPadre) {
             global $wpdb;
             $sql = $wpdb->prepare("SELECT COUNT(*) FROM " . T_DIPENDENZE . " WHERE IdDip=%s;",$idRequisitoPadre);
-            echo $sql;
             return $wpdb->get_var($sql);
         }
 }
