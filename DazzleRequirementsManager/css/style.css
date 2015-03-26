@@ -92,3 +92,8 @@ textArea.form_item_DW{
 .requisito_non_soddisfatto{
     background-color: #ff3333;
 }
+
+.img_uc{
+    max-height:500px;
+    max-width: 95%;
+}

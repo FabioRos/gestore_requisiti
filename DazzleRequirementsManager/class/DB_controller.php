@@ -70,6 +70,37 @@ class DB_controller {
         $res4 = $wpdb->query($sql);
     }
     
-    //put your code here
-}
+    
+    public function get_img_from_ReqID($ReqId) {
+        $array_img = array();
+        global $wpdb;
 
+        $sql = "SELECT Percorso AS Path FROM " . T_IMG_USE_CASE . " img JOIN " . T_IMG_REQUISITO . " imgreq"
+                . " ON imgreq.IdImg = img.IdImg WHERE imgreq.IdReq='" . $ReqId . "';";
+        //echo $sql;
+        $array_img = $wpdb->get_results($sql);
+        return $array_img;
+    }
+    
+    public function get_img_url_and_txt_from_ReqID($ReqId) {
+        $array_img = array();
+        global $wpdb;
+
+        $sql = "SELECT Percorso AS Path, Titolo FROM " . T_IMG_USE_CASE . " img JOIN " . T_IMG_REQUISITO . " imgreq"
+                . " ON imgreq.IdImg = img.IdImg WHERE imgreq.IdReq='" . $ReqId . "';";
+        //echo $sql;
+        $array_img = $wpdb->get_results($sql);
+        return $array_img;
+    }
+    
+    
+    public function get_images_string_from_ReqId($ReqId) {//T?
+        $array_img = $this->get_img_from_ReqID($ReqId);
+        $string_images='';
+        foreach ($array_img as $img_src){
+            $string_images = $string_images."<img src='".$img_src."' />";
+        }
+        echo $string_images;
+        return $string_images;
+    }
+}

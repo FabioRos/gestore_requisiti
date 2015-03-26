@@ -5,6 +5,8 @@
  */
 /* * ******************************************************************************** */
 
+
+
 class DWMenuPages {
 
     public function __construct() {
@@ -89,8 +91,9 @@ class DWMenuPages {
 
     public function inserimento_requisiti_handler() {
         echo "<h1>INSERIMENTO REQUISITI</h1>";
+        //echo  admin_url( 'admin.php?page=inserimento_slug', 'http' );
         ?>
-        <form enctype="multipart/form-data" method="POST" action="http://localhost/roomrose/wp-admin/admin.php?page=inserimento_slug" id="nuovoRequisito" >
+        <form enctype="multipart/form-data" method="POST" action="<?php echo admin_url( 'admin.php?page=inserimento_slug', 'http' ); ?>" id="nuovoRequisito" >
         <label for="parent" class="form_item_DW">Padre:</label>
         <?php
         $controller = new controller_requisito ();
@@ -122,6 +125,7 @@ class DWMenuPages {
         <?php
         include PLUGIN_BASE_URL . '/pages/page_insert.php';
         
+       
 
         //BUSINESS LOGIC
         
@@ -148,21 +152,7 @@ class DWMenuPages {
                $idReq = $controller->get_max_top_level_number()+1;
             }
             
-            //$controller_dip= new controller_dipendenze();
-        
-            
-           // $idReq=$controller_dip->conta_figli("fydfxxx");
-            
-            
-            /* per il calcolo dell'IdReq:
-             * 
-             * 1.prendo l'id del padre nel formato 1.2.....
-             * 2.conto quanti figli ha nella tabella delle dipendenze
-             * 3.l' IdReq sarà: <IdPadre>.<numero figli correnti+1>
-             * 
-             */
-            
-            
+ 
             $controller = new controller_requisito ();
             $controller->inserisci($idReq, $t, $i, $d);
             $controller_img=new controller_immagineuc();
@@ -172,7 +162,7 @@ class DWMenuPages {
             
             $controller_req_img=new controller_req_img();
             
-            $base_path = $_POST["base_path_img"];
+            $base_path = $_POST["base_path_img"];;
             for($i=1;$i<=5;$i++){
                 
                 $percorso = trim($base_path.$_POST["img$i"]);
@@ -199,7 +189,7 @@ class DWMenuPages {
           
            <script type='text/javascript'>
         
-       // $("#select_parent").append(new Option(""+option text+"", ""+value+""));
+        
         
         
         
@@ -287,8 +277,19 @@ class DWMenuPages {
             var row = jQuery("<tr />")
             jQuery("#requirements_render").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
             row.append(jQuery("<td id='idReq"+rowData.IdReq+"'>" + rowData.IdReq + "</td>"));
-            row.append(jQuery("<td id='Tipo"+rowData.IdReq+"'>" + rowData.Tipo + "</td>"));
-            row.append(jQuery("<td id='Importanza"+rowData.IdReq+"'>" + rowData.Imp + "</td>"));
+            
+            var t="Funzionale";
+            if(rowData.Tipo=="Q")
+                t="Qualitativo";
+            else if(rowData.Tipo=="D")
+                t="Prestazionale"
+            row.append(jQuery("<td id='Tipo"+rowData.IdReq+"'>" + t + "</td>"));
+            var imp="Obbligatorio";
+            if(rowData.Imp=="1")
+                imp="Desiderabile";
+            else if(rowData.Tipo=="2")
+                imp="Opzionale";
+            row.append(jQuery("<td id='Importanza"+rowData.IdReq+"'>" + imp + "</td>"));
             row.append(jQuery("<td id='Descrizione"+rowData.IdReq+"'>" + rowData.Descr + "</td>"));
              var s;
             if(rowData.Soddisfatto=="1"){
@@ -314,30 +315,40 @@ class DWMenuPages {
     
    public function img_requisiti_handler() {
         echo "<h1>ASSOCIAZIONI IMMAGINI REQUISITI</h1>";
-        $url  = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
-        $url .= $_SERVER['SERVER_NAME'];
-        $url .= $_SERVER['REQUEST_URI'];
 
+        $url_ajax_utils  = PLUGIN_BASE_URL."class/ajax_utils.php";
+       // $url_menu_pages .= $_SERVER[''];        
+        //echo $url_ajax_utils;
         $controller_requisiti = new controller_requisito ();
         $json_data=json_encode($controller_requisiti->get_all());
-        
-          echo "<select class=\"form_item_DW\" id='select_requisiti' name=\"parent\" id=\"importanza\"> "
+        //$current_Req_Id;
+          echo "<select class=\"form_item_DW\" id='select_requisiti' name=\"select_requisiti\" > "
                  . " <option value=\"NULL\">nessuno</option>"
                  . "</select>";
          
-          for($i=1;$i<=5;$i++){
-              echo "<img id='img_$i'class='DW_images'>";
-              
-          }
           
+          ?>
+        <div id="id_corrente_txt" ></div>
+        <div id="img_wrapper"></div>
+       
+        
+          <?php
+
+          $cntrl_db= new DB_controller();
+             ?>
+                
+                 <script type='text/javascript'>
+                     var id_selezionato=jQuery('#select_requisiti option:selected').val();
+                    jQuery('#img_wrapper option:selected').append(id_selezionato);
+                
+                 </script>
+                <?php
+
           ?>
         
          
         <script type='text/javascript'>
-        
-       // $("#select_parent").append(new Option(""+option text+"", ""+value+""));
-        
-        
+
         
         
         function popola_select(data) {
@@ -351,12 +362,25 @@ class DWMenuPages {
         }
         
         jQuery("#select_requisiti").change(function(){
-                 var img = new Image();
-                 img.src=<?php echo $_POST["base_path_img"]; ?>+jQuery("#select_requisiti option:selected").value;
-                 if(img.height != 0)
-                     alert('vuoto');
+                     var nuovo_id=jQuery("#select_requisiti").val();
+                     jQuery("#id_corrente_txt").html(nuovo_id);
+                     jQuery("#img_wrapper").html("ciao");
                      
-             });
+                     jQuery.ajax({
+                        type: "GET",
+                        url:'<?php $url_ajax_utils.="?function_name=ajax_get_images_url&id_req=";
+                        echo $url_ajax_utils; ?>'+nuovo_id,
+                       // dataType: 'json',
+                       // data: {'function_name':'ajax_get_images_url', 'id_req':''+nuovo_id+''},
+                        success:function (obj) {
+                            jQuery('#img_wrapper').html(obj);
+                            //alert('ok');
+                        },
+                        error:function(){
+                            alert('ko');
+                        }
+                    });
+            });
 
         jQuery(document).ready(function() {
             var lista_requisiti_json = <?php echo $json_data; ?>;
@@ -369,47 +393,6 @@ class DWMenuPages {
 
         </script>
         <?php
-        
-        
-//echo(dirname(dirname($url))).'/wp-content/plugins/DazzleRequirementsManager/images/Requisiti/*.*';
-
-//get all image files with a .jpg extension.
-//$images = glob(dirname(dirname($url)).'/wp-content/plugins/DazzleRequirementsManager/images/Requisiti/*.jpg');
-//echo dirname(dirname($url)).'/wp-content/plugins/DazzleRequirementsManager/images/Requisiti';
-////print each file name
-//foreach($images as $image){
-//    echo $image;
-//}
-        
-
-       /* $uploads = dirname(dirname($url)).'/wp-content/plugins/DazzleRequirementsManager/images/Requisiti';
-        echo $uploads;
-        $dir = opendir($uploads);
-        if ($dir) {
-                $images = array();
-                while (false !== ($file = readdir($dir))) {
-                        if ($file != "." && $file != "..") {
-                                $images[] = $file; 
-                        }
-                }
-                closedir($dir);
-        }
-
-        echo '<ul>';
-        foreach($images as $image) {
-                echo '<li><img src="';
-                echo dirname(dirname($url)).'/wp-content/plugins/DazzleRequirementsManager/images/Requisiti/'.$image;
-                echo '" alt="" /></li>';
-        }
-        echo '</ul>';
-*/
-        
-        /*
-         Per il momento le immagini si devono caricare dal frontend con una pagina apposita, serve il plugin Wordpress File Upload
-         *          */
-        
-       // echo do_shortcode('[wordpress_file_upload uploadpath="plugins/DazzleRequirementsManager/images/Requisiti" createpath="true" showtargetfolder="true" placements="title/filename+selectbutton+uploadbutton/progressbar" uploadtitle="Carica foto" selectbutton="Seleziona Foto" uploadbutton="Carica" warningmessage="File %filename% è stato caricato ma con alcuni Warning" errormessage="File %filename% non caricato" waitmessage="il File %filename% si trova in fase di caricamento" medialink="true"]');
-// echo '[fu-upload-form]';
     }
 
     
@@ -428,5 +411,6 @@ class DWMenuPages {
 }//CLASS END
 
 //devo istanziare la classe
-$aux = new DWMenuPages()
+$aux = new DWMenuPages();
+
 ?>

@@ -2,7 +2,7 @@
 
 $plugin_url = plugin_dir_url(__DIR__);
 define('PLUGIN_BASE_URL', $plugin_url); 
-
+define( 'REQ_IMG_BASE_URL', PLUGIN_BASE_URL.'images/Requisiti/');
 
 //testato::  http://***/wp-content/plugins/DazzleRequirementsManager/
 
