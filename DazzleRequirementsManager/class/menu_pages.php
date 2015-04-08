@@ -10,7 +10,8 @@ class DWMenuPages {
 
     public function __construct() {
         add_action('admin_menu', array(&$this, 'register_pages'));
-        add_action('admin_enqueue_scripts', array(&$this, 'adds_to_the_head'));
+        add_action('admin_enqueue_scripts', array(&$this, 'adds_to_the_head')); //Backend
+        add_action('wp_enqueue_scripts', array(&$this, 'adds_to_the_head'));    //Frontend
         //Aggiungo la favicon al front-end
         add_action('wp_head', array(&$this, 'my_favicon'));
         //Aggiungo la favicon al back-end
@@ -18,6 +19,10 @@ class DWMenuPages {
         $this->includes();
         $controller = new DB_controller();
         $controller->setup_db();
+        
+        //GENERAZIONE SHORTCODES
+        add_shortcode('tbl_verifica', array(&$this, 'verifica_requisiti_handler'));
+        
     }
 
     public function includes() {
@@ -168,14 +173,7 @@ class DWMenuPages {
                     $controller_req_img->insert($idReq, $controller_img->get_id($percorso));
                 }
             }
-                
-            
-            
-         
-            
-            
-            
-            
+
             unset($_POST['descrizione']);
             unset($_POST['tipo']);
             unset($_POST['importanza']);
@@ -217,7 +215,7 @@ class DWMenuPages {
         $controller = new controller_requisito ();
         $json_data=json_encode($controller->get_all());
         echo " <br />";//.$json_data;
-        
+        $url_ajax_modifica_requisito  = PLUGIN_BASE_URL."class/ajax_modifica_requisito.php";
         ?>
         <script type='text/javascript'>
         
@@ -226,29 +224,99 @@ class DWMenuPages {
                 drawRow(data[i],i);
             }
         }
+        
 
         function drawRow(rowData,index) {
             var row = jQuery("<tr id='riga"+index+"' />");
+            
             jQuery("#requirements_render").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
             row.append(jQuery("<td id='idReq"+index+"'>" + rowData.IdReq + "</td>"));
-            row.append(jQuery("<td id='Tipo"+index+"'>" + rowData.Tipo + "</td>"));
-            row.append(jQuery("<td id='Importanza"+index+"'>" + rowData.Imp + "</td>"));
+            
+            var t="Funzionale";
+            if(rowData.Tipo=="Q")
+                t="Qualitativo";
+            else if(rowData.Tipo=="D")
+                t="Prestazionale"
+            row.append(jQuery("<td id='Tipo"+index+"'>" + t + "</td>"));
+            var imp="Obbligatorio";
+            if(rowData.Imp=="1")
+                imp="Desiderabile";
+            else if(rowData.Tipo=="2")
+                imp="Opzionale";
+            row.append(jQuery("<td id='Importanza"+index+"'>" + imp + "</td>"));
             row.append(jQuery("<td id='Descrizione"+index+"'>" + rowData.Descr + "</td>"));
-            row.append(jQuery("<td id='Soddisfatto"+index+"'>" + rowData.Soddisfatto + "</td>"));
-            row.append(jQuery("<td id='btn_modifica"+index+"'> <input type='button' value='modifica' onclick='formMod("+index+")' /></td>"));
+             var s;
+            if(rowData.Soddisfatto=="1"){
+                s="requisito_soddisfatto";
+            }else  if(rowData.Soddisfatto=="0"){
+                s="requisito_non_soddisfatto";
+            }
+            row.append(jQuery("<td id='Soddisfatto"+index+"' class='"+ s +"'>" + rowData.Soddisfatto + "</td>"));  
+//        
+//        var row = jQuery("<tr id='riga"+index+"' />");
+//            jQuery("#requirements_render").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+//            row.append(jQuery("<td id='idReq"+index+"'>" + rowData.IdReq + "</td>"));
+//            row.append(jQuery("<td id='Tipo"+index+"'>" + rowData.Tipo + "</td>"));
+//            row.append(jQuery("<td id='Importanza"+index+"'>" + rowData.Imp + "</td>"));
+//            row.append(jQuery("<td id='Descrizione"+index+"'>" + rowData.Descr + "</td>"));
+//            row.append(jQuery("<td id='Soddisfatto"+index+"'>" + rowData.Soddisfatto + "</td>"));
+           row.append(jQuery("<td id='btn_modifica"+index+"'> <input type='button' value='modifica' onclick='formMod("+index+")' /></td>"));
         }
        
         function formMod(indice) {
             var id= jQuery("#idReq"+indice+"").text();
-            jQuery("#Tipo"+indice+"").html("<select class='form_item_DW' name='tipo' id='tipo'><option value='F'>Funzionale</option><option value='Q'>Qualitativo</option><option value='D'>Prestazionale</select>");
-            jQuery("#Importanza"+indice+"").html("<select class='form_item_DW' name='importanza' id='importanza'><option value='0'>Obbligatorio</option><option value='1'>Desiderabile</option><option value='2'>Opzionale</option></select>");
-            jQuery("#Descrizione"+indice+"").html("<textarea class='form_item_DW' rows='4' cols='50' name='descrizione' id='descrizione' placeholder=''></textarea>");
-            jQuery("#Soddisfatto"+indice+"").html("<select class'form_item_DW' name 'soddisfatto' id='soddisfatto'><option value='N'>No</option><option value='S'>Si</option></select>");
-            jQuery("#btn_modifica"+indice+"").html("<input type='button' value='salva' onclick='salva("+id+")' />");
+            var old_tipo=jQuery("#Tipo"+indice+"").text();
+            var old_imp=jQuery("#Importanza"+indice+"").text();
+            var old_desc=jQuery("#Descrizione"+indice+"").text();
+            var old_sodd=jQuery("#Soddisfatto"+indice+"").text();
+            jQuery("#Tipo"+indice+"").html("<select class='form_item_DW' name='tipo' id='tipo_edit"+indice+"'><option>Funzionale</option><option>Qualitativo</option><option>Prestazionale</select>");
+            jQuery("#Importanza"+indice+"").html("<select class='form_item_DW' name='importanza' id='importanza_edit"+indice+"'><option>Obbligatorio</option><option>Desiderabile</option><option>Opzionale</option></select>");
+            jQuery("#Descrizione"+indice+"").html("<textarea class='form_item_DW' rows='4' cols='50' name='descrizione' id='descrizione_edit"+indice+"' placeholder=''></textarea>");
+            jQuery("#Soddisfatto"+indice+"").html("<select class'form_item_DW' name 'soddisfatto' id='soddisfatto_edit"+indice+"'><option>No</option><option>Si</option></select>");
+            jQuery("#btn_modifica"+indice+"").html("<input type='button' value='salva' id='submit_edit"+indice+"' onclick='salva("+id+","+indice+")' />");
+            //popolare con valori di default
+            jQuery("#tipo_edit"+indice).val(old_tipo);
+            jQuery("#importanza_edit"+indice+"").val(old_imp);
+            var s='No';        
+            if(old_sodd==1)
+                s='Si';
+            jQuery("#soddisfatto_edit"+indice+"").val(s);
+            jQuery("#descrizione_edit"+indice+"").val(old_desc);
         }
         
-        function salva(id) {
-            
+        function salva(id,indice) { // io passerei direttamente la stringa json con tutto dentro
+                //alert(indice);
+                var v = Array();
+                
+                v[0]=id;
+                v[1]=jQuery("#tipo_edit"+indice+"").val();
+                v[2]=jQuery("#importanza_edit"+indice+"").val();
+                v[3]=jQuery("#descrizione_edit"+indice+"").val();
+                v[4]= jQuery("#soddisfatto_edit"+indice+"").val();
+                var json_v=JSON.stringify(v);
+                alert(json_v);
+                
+              jQuery.ajax({
+
+                type: "POST",
+//                dataType: "json",
+                url:'<?php echo $url_ajax_modifica_requisito; ?>',
+                data: {
+                    id: v[0],
+                    tipo: v[1],
+                    importanza: v[2],
+                    descrizione: v[3],
+                    soddisfatto: v[4]
+                },
+                success: function(data){
+                    alert('ok');
+                    jQuery("tr#riga"+indice+"").html(data);
+                },
+                error: function(){
+                    alert('ko');
+                }
+
+            }); // Ajax Call
         }
         
         jQuery(document).ready(function() {
