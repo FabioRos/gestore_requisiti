@@ -29,4 +29,4 @@ class controller_dipendenze {
         }
 }
 
-?> 
+?>

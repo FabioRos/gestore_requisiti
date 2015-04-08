@@ -32,4 +32,3 @@ function ajax_get_images_url_and_txt($id_Req){
     $cntrl_db= new DB_controller();
     return  $cntrl_db->get_img_url_and_txt_from_ReqID($id_Req);
 }
-
