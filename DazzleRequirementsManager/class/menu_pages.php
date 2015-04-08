@@ -302,6 +302,7 @@ class DWMenuPages {
 //                dataType: "json",
                 url:'<?php echo $url_ajax_modifica_requisito; ?>',
                 data: {
+                    indice_riga: indice,
                     id: v[0],
                     tipo: v[1],
                     importanza: v[2],
@@ -311,6 +312,7 @@ class DWMenuPages {
                 success: function(data){
                     alert('ok');
                     jQuery("tr#riga"+indice+"").html(data);
+                    jQuery("tr#riga"+indice+"").append( "<td id='btn_modifica"+indice+"'> <input type='button' value='modifica' onclick='formMod("+indice+")'></td>");
                 },
                 error: function(){
                     alert('ko');
