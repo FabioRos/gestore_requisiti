@@ -292,7 +292,7 @@ class DWMenuPages {
                 v[1]=jQuery("#tipo_edit"+indice+"").val();
                 v[2]=jQuery("#importanza_edit"+indice+"").val();
                 v[3]=jQuery("#descrizione_edit"+indice+"").val();
-                v[4]= jQuery("#soddisfatto_edit"+indice+"").val();
+                v[4]=jQuery("#soddisfatto_edit"+indice+"").val();
                 var json_v=JSON.stringify(v);
                 alert(json_v);
                 
@@ -302,7 +302,7 @@ class DWMenuPages {
 //                dataType: "json",
                 url:'<?php echo $url_ajax_modifica_requisito; ?>',
                 data: {
-                    indice_riga: indice,
+                    indice_riga: indice.toString(),
                     id: v[0],
                     tipo: v[1],
                     importanza: v[2],

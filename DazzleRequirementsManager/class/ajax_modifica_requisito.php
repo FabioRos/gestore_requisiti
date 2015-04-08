@@ -12,9 +12,12 @@ if($_POST['soddisfatto']=='No'){
 $controller = new controller_requisito();
 $controller -> aggiornaReq($_POST['id'],$_POST['tipo'],$_POST['importanza'],$_POST['descrizione'],$sodd_value);
 
-echo "<td id='idReq{$_POST['indice']}'> {$_POST['id']} </td>";
-echo "<td id='Tipo{$_POST['indice']}'> {$_POST['tipo']} </td>";
-echo "<td id='Importanza{$_POST['indice']}'> {$_POST['importanza']} </td>";
-echo "<td id='Descrizione{$_POST['indice']}'> {$_POST['descrizione']} </td>";
-echo "<td id='Soddisfatto{$_POST['indice']}' class='{$class_soddisfatto}'> {$sodd_value} </td>";
+$stringa = $_POST['indice_riga'];
+settype($stringa,"string");
+
+echo "<td id='idReq".$stringa."'>".$_POST['id']."</td>";
+echo "<td id='Tipo".$stringa."'>{$_POST['tipo']}</td>";
+echo "<td id='Importanza".$stringa."'>{$_POST['importanza']}</td>";
+echo "<td id='Descrizione".$stringa."'>{$_POST['descrizione']}</td>";
+echo "<td id='Soddisfatto".$stringa."' class='{$class_soddisfatto}'>{$sodd_value}</td>";
 ?>
