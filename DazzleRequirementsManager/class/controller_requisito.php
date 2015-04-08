@@ -77,4 +77,10 @@ class controller_requisito {
         }
         return $max;
     }
+    
+    public function aggiornaReq($idReq,$tipo,$imp,$descr,$sodd) {
+        global $wpdb;
+        $sql = $wpdb->prepare("UPDATE " . T_REQUISITO . " SET Tipo=%s, Imp=%d, Descr=%s, Soddisfatto=%d WHERE IdReq=%s;",$tipo,$imp,$descr,$sodd,$idReq);
+        $wpdb->query($sql);
+    }
 }
