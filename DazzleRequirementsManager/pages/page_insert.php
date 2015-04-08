@@ -25,7 +25,7 @@ require_once $_SESSION['url_plugin_dir'].'/class/DB_controller.php';
         <option value="2">Opzionale</option>
     </select>
     <label  class="form_item_DW" for="tipo">Tipo:</label>
-   <select class="form_item_DW"  name="tipo" id="tipo">
+    <select class="form_item_DW"  name="tipo" id="tipo">
         <option value="F">Funzionale</option>
         <option value="Q">Qualitativo</option>
         <option value="D">Prestazionale</option>

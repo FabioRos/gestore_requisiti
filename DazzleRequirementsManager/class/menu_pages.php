@@ -223,24 +223,39 @@ class DWMenuPages {
         
         function drawTable(data) {
             for (var i = 0; i < data.length; i++) {
-                drawRow(data[i]);
+                drawRow(data[i],i);
             }
         }
 
-        function drawRow(rowData) {
-            var row = jQuery("<tr />")
+        function drawRow(rowData,index) {
+            var row = jQuery("<tr id='riga"+index+"' />");
             jQuery("#requirements_render").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
-            row.append(jQuery("<td id='idReq'>" + rowData.IdReq + "</td>"));
-            row.append(jQuery("<td id='Tipo'>" + rowData.Tipo + "</td>"));
-            row.append(jQuery("<td id='Importanza'>" + rowData.Imp + "</td>"));
-            row.append(jQuery("<td id='Descrizione'>" + rowData.Descr + "</td>"));
-            row.append(jQuery("<td id='Soddisfatto'>" + rowData.Soddisfatto + "</td>"));
-            row.append(jQuery("<td id='btn_modifica'> <input type='button' value='modifica'/></td>"));
+            row.append(jQuery("<td id='idReq"+index+"'>" + rowData.IdReq + "</td>"));
+            row.append(jQuery("<td id='Tipo"+index+"'>" + rowData.Tipo + "</td>"));
+            row.append(jQuery("<td id='Importanza"+index+"'>" + rowData.Imp + "</td>"));
+            row.append(jQuery("<td id='Descrizione"+index+"'>" + rowData.Descr + "</td>"));
+            row.append(jQuery("<td id='Soddisfatto"+index+"'>" + rowData.Soddisfatto + "</td>"));
+            row.append(jQuery("<td id='btn_modifica"+index+"'> <input type='button' value='modifica' onclick='formMod("+index+")' /></td>"));
+        }
+       
+        function formMod(indice) {
+            var id= jQuery("#idReq"+indice+"").text();
+            jQuery("#Tipo"+indice+"").html("<select class='form_item_DW' name='tipo' id='tipo'><option value='F'>Funzionale</option><option value='Q'>Qualitativo</option><option value='D'>Prestazionale</select>");
+            jQuery("#Importanza"+indice+"").html("<select class='form_item_DW' name='importanza' id='importanza'><option value='0'>Obbligatorio</option><option value='1'>Desiderabile</option><option value='2'>Opzionale</option></select>");
+            jQuery("#Descrizione"+indice+"").html("<textarea class='form_item_DW' rows='4' cols='50' name='descrizione' id='descrizione' placeholder=''></textarea>");
+            jQuery("#Soddisfatto"+indice+"").html("<select class'form_item_DW' name 'soddisfatto' id='soddisfatto'><option value='N'>No</option><option value='S'>Si</option></select>");
+            jQuery("#btn_modifica"+indice+"").html("<input type='button' value='salva' onclick='salva("+id+")' />");
+        }
+        
+        function salva(id) {
+            
         }
         
         jQuery(document).ready(function() {
             var lista_requisiti_json = <?php echo $json_data; ?>;
             drawTable(lista_requisiti_json);
+       
+           
         });  
 
         </script>
@@ -251,12 +266,10 @@ class DWMenuPages {
     }
     public function verifica_requisiti_handler() {
         echo "<h1>VERIFICA REQUISITI</h1>";
-         include PLUGIN_BASE_URL . '/pages/page_verifica.php';
-        
-         
+        include PLUGIN_BASE_URL . '/pages/page_verifica.php';
+            
         $controller = new controller_requisito ();
         //$controller->set_soddisfatto("1", 1);
-        
         
         $json_data=json_encode($controller->get_all());
         echo " <br />";//.$json_data;
@@ -298,56 +311,41 @@ class DWMenuPages {
            
         }
         
-        
         jQuery(document).ready(function() {
             var lista_requisiti_json = <?php echo $json_data; ?>;
             drawTable(lista_requisiti_json);
         });  
 
         </script>
-        
         <?php
-        
     }
     
-   public function img_requisiti_handler() {
+    public function img_requisiti_handler() {
         echo "<h1>ASSOCIAZIONI IMMAGINI REQUISITI</h1>";
 
         $url_ajax_utils  = PLUGIN_BASE_URL."class/ajax_utils.php";
-       // $url_menu_pages .= $_SERVER[''];        
+        //$url_menu_pages .= $_SERVER[''];        
         //echo $url_ajax_utils;
         $controller_requisiti = new controller_requisito ();
         $json_data=json_encode($controller_requisiti->get_all());
         //$current_Req_Id;
-          echo "<select class=\"form_item_DW\" id='select_requisiti' name=\"select_requisiti\" > "
-                 . " <option value=\"NULL\">nessuno</option>"
-                 . "</select>";
-         
-          
-          ?>
+        echo "<select class=\"form_item_DW\" id='select_requisiti' name=\"select_requisiti\" > "
+              . " <option value=\"NULL\">nessuno</option></select>";
+        ?>
         <div id="id_corrente_txt" ></div>
         <div id="img_wrapper"></div>
-       
-        
-          <?php
+        <?php
 
-          $cntrl_db= new DB_controller();
-             ?>
+        $cntrl_db= new DB_controller();
+        ?>
                 
-                 <script type='text/javascript'>
-                     var id_selezionato=jQuery('#select_requisiti option:selected').val();
-                    jQuery('#img_wrapper option:selected').append(id_selezionato);
-                
-                 </script>
-                <?php
-
-          ?>
-        
-         
+        <script type='text/javascript'>
+        var id_selezionato=jQuery('#select_requisiti option:selected').val();
+        jQuery('#img_wrapper option:selected').append(id_selezionato);
+        </script>
+                 
         <script type='text/javascript'>
 
-        
-        
         function popola_select(data) {
             for (var i = 0; i < data.length; i++) {
                 aggiungi_opzione(data[i]);
@@ -359,52 +357,42 @@ class DWMenuPages {
         }
         
         jQuery("#select_requisiti").change(function(){
-                     var nuovo_id=jQuery("#select_requisiti").val();
-                     jQuery("#id_corrente_txt").html(nuovo_id);
-                     jQuery("#img_wrapper").html("ciao");
-                     
-                     jQuery.ajax({
-                        type: "GET",
-                        url:'<?php $url_ajax_utils.="?function_name=ajax_get_images_url&id_req=";
-                        echo $url_ajax_utils; ?>'+nuovo_id,
-                       // dataType: 'json',
-                       // data: {'function_name':'ajax_get_images_url', 'id_req':''+nuovo_id+''},
-                        success:function (obj) {
-                            jQuery('#img_wrapper').html(obj);
-                            //alert('ok');
-                        },
-                        error:function(){
-                            alert('ko');
-                        }
-                    });
+            var nuovo_id=jQuery("#select_requisiti").val();
+            jQuery("#id_corrente_txt").html(nuovo_id);
+            jQuery("#img_wrapper").html("ciao");
+               
+            jQuery.ajax({
+            type: "GET",
+            url:'<?php $url_ajax_utils.="?function_name=ajax_get_images_url&id_req=";
+                 echo $url_ajax_utils; ?>'+nuovo_id,
+                 // dataType: 'json',
+                 // data: {'function_name':'ajax_get_images_url', 'id_req':''+nuovo_id+''},
+            success:function(obj){
+                        jQuery('#img_wrapper').html(obj);
+                        //alert('ok');
+                    },
+            error:function(){
+                      alert('ko');
+                  }
             });
+        });
 
         jQuery(document).ready(function() {
             var lista_requisiti_json = <?php echo $json_data; ?>;
-            popola_select(lista_requisiti_json);
-            
-//             
-            
-            
+            popola_select(lista_requisiti_json);       
         });  
 
         </script>
         <?php
     }
 
-    
-    
-    
-    
     public static function mysql_to_json($sth){
         $rows = array();
         while ($r = mysqli_fetch_assoc($sth)) {
             $rows[] = $r;
         }
         print json_encode($rows);
-    
-        
-        }
+    }
 }//CLASS END
 
 //devo istanziare la classe

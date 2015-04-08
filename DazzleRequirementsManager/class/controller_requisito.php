@@ -34,16 +34,18 @@ class controller_requisito {
         //chiama funzione assestamento genitori
     }
 
-        public function inserisci($idReq, $tipo, $importanza, $descrizione) {
+    public function inserisci($idReq, $tipo, $importanza, $descrizione) {
         global $wpdb;
         $sql = $wpdb->prepare("INSERT INTO " . T_REQUISITO . " VALUES(%s,%s,%d,%s,FALSE);", $idReq, $tipo, $importanza, $descrizione);
         $wpdb->query($sql);
     }
+    
     public function rimuovi($idReq) {
         global $wpdb;
         $sql = $wpdb->prepare("DELETE FROM  " . T_REQUISITO . "  WHERE idReq=%s;", $idReq);
         $wpdb->query($sql);
     }
+    
     public function modifica_immagine($idReq) {
         global $wpdb;
        // $sql = $wpdb->prepare("INSERT INTO " . T_REQUISITO . " VALUES(%s,%s,%d,%s,FALSE);", $idReq, $tipo, $importanza, $descrizione);
@@ -56,11 +58,12 @@ class controller_requisito {
         $wpdb->query($sql);
     }
     
-     public function soddisfatto($idReq,$soddisfatto) {
+    public function soddisfatto($idReq,$soddisfatto) {
         global $wpdb; 
         $sql = $wpdb->prepare("UPDATE " . T_REQUISITO . " SET Soddisfatto=%d WHERE idReq=%s;",$soddisfatto,$idReq);
         $wpdb->query($sql);
     }
+    
     public function get_max_top_level_number() {
         $array_id_req=$this->get_all_Id();
         $max=0;
